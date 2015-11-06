@@ -1,0 +1,14 @@
+Partition Merge Status : Successful - Fri Nov 06 11:43:47 2015
+Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version
+Revision Name : ArrayUltrasound
+Top-level Entity Name : ArrayUltrasound
+Family : Cyclone III
+Total logic elements : 13,896
+    Total combinational functions : 10,469
+    Dedicated logic registers : 11,938
+Total registers : 11938
+Total pins : 71
+Total virtual pins : 0
+Total memory bits : 853,016
+Embedded Multiplier 9-bit elements : 16
+Total PLLs : 2

@@ -13,10 +13,10 @@ parameter
 	DEVICE_INDEX1		= 8'h0F,  //no INCLUDE dco and fco 
 	DEVICE_UPDATE_EN	= 8'h01,
 	DEVICE_UPDATE_DIS	= 8'h00,	
-	Modes				   = 8'h00,
-	Clock			   	= 8'h01,
+	Modes				= 8'h00,
+	Clock				= 8'h01,
 	TEST_IO				= 8'h00,  //mi
-	FLEX_CHANNEL_INPUT= 8'hE0,  //antialias filter 0.7*1/4.5 Fsampling
+	FLEX_CHANNEL_INPUT	= 8'h0E,  //antialias filter 0.7*1/4.5 Fsampling
 	FLEX_OFFSET			= 8'h20,
 	FLEX_GAIN			= 8'h0E,  //PGA:30db,LNA 21.3db
 	BIAS_CURRENT		= 8'h08,
@@ -42,6 +42,7 @@ parameter
 	DELAY_G				= 8'h03,  //180degree
 	DELAY_H				= 8'h03;  //180degree
 
+
 				
 						
 	
@@ -49,33 +50,29 @@ parameter
 		
 
     reg [12:0] SPI_Addr;
-    reg [3:0]  SPI_STAT;
-    reg [7:0]  Addr_Counter;
-    reg [7:0]  SND_DATA;
-    reg        SPI_New_Word;
-    reg        SPI_RW ;//= 1'b1;
-    wire       SPI_Over;
+    reg [3:0] SPI_STAT;
+    reg [7:0] Addr_Counter;
+    reg [7:0] SND_DATA;
+    reg SPI_New_Word;
+    reg  SPI_RW ;//= 1'b1;
+    wire SPI_Over;
     
     parameter
 		SPI_PR	 = 4'd0,
-		SPI_REQ   = 4'd1,
-		SPI_WAIT  = 4'd2,
-		SPI_END   = 4'd3;				
+		SPI_REQ  = 4'd1,
+		SPI_WAIT = 4'd2,
+		SPI_END  = 4'd3;				
 		
-	always @(posedge SPI_CLK or negedge RST_n) 
-	begin
-		if(~RST_n) 
-		   begin
-			SPI_Addr     <= 8'd0; 
-			SPI_STAT     <= 4'd0;
+	always @(posedge SPI_CLK or negedge RST_n) begin
+		if(~RST_n) begin
+			SPI_Addr <= 8'd0; 
+			SPI_STAT <= 4'd0;
 			Addr_Counter <= 13'd0;
 			SPI_New_Word <= 1'b0;
-			SPI_STAT     <= SPI_PR;
-		   end
-		else 
-		 begin
-			if(Addr_Counter <= 8'd24) 
-			 begin
+			SPI_STAT <= SPI_PR;
+		end
+		else begin
+			if(Addr_Counter <= 8'd24) begin
 				case(SPI_STAT)
 				SPI_PR:  begin
 					case(Addr_Counter) 

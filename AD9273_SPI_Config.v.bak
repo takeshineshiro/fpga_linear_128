@@ -6,6 +6,7 @@ module AD9273_SPI_Config(
 );
 
 parameter 
+parameter 
 	CHIP_PORT_CONFIG 	= 8'h18,
 	CHIP_ID				= 8'h2F,
 	CHIP_GRADE			= 8'h10,
@@ -42,6 +43,7 @@ parameter
 	DELAY_G				= 8'h03,  //180degree
 	DELAY_H				= 8'h03;  //180degree
 
+
 				
 						
 	
@@ -71,7 +73,7 @@ parameter
 			SPI_STAT <= SPI_PR;
 		end
 		else begin
-			if(Addr_Counter <= 8'd15) begin
+			if(Addr_Counter <= 8'd24) begin
 				case(SPI_STAT)
 				SPI_PR:  begin
 					case(Addr_Counter) 
@@ -170,13 +172,73 @@ parameter
 						SPI_STAT <= SPI_REQ;
 						SPI_New_Word <= 1'b1;
 					end		
-									//test
+
+																
 					8'd15: begin
+						SPI_Addr <= 8'h19;
+						SND_DATA <= USER_PATT1_LSB;
+						SPI_STAT <= SPI_REQ;
+						SPI_New_Word <= 1'b1;
+					end										
+					8'd16: begin
+						SPI_Addr <= 8'h1A;
+						SND_DATA <= USER_PATT1_MSB;
+						SPI_STAT <= SPI_REQ;
+						SPI_New_Word <= 1'b1;
+					end										
+					8'd17: begin
+						SPI_Addr <= 8'h1B;
+						SND_DATA <= USER_PATT2_LSB;
+						SPI_STAT <= SPI_REQ;
+						SPI_New_Word <= 1'b1;
+					end										
+					8'd18: begin
+						SPI_Addr <= 8'h1C;
+						SND_DATA <= USER_PATT2_MSB;
+						SPI_STAT <= SPI_REQ;
+						SPI_New_Word <= 1'b1;
+					end										
+					8'd19: begin
+						SPI_Addr <= 8'h21;
+						SND_DATA <= SERIAL_CONTROL;
+						SPI_STAT <= SPI_REQ;
+						SPI_New_Word <= 1'b1;
+					end										
+					8'd20: begin
+						SPI_Addr <= 8'h22;
+						SND_DATA <= SERIAL_CH_STAT;
+						SPI_STAT <= SPI_REQ;
+						SPI_New_Word <= 1'b1;
+					end										
+					8'd21: begin
+						SPI_Addr <= 8'h2B;
+						SND_DATA <= FLEX_FILTER;
+						SPI_STAT <= SPI_REQ;
+						SPI_New_Word <= 1'b1;
+					end										
+					8'd22: begin
+						SPI_Addr <= 8'h2C;
+						SND_DATA <= ANALOG_INPUT;
+						SPI_STAT <= SPI_REQ;
+						SPI_New_Word <= 1'b1;
+					end										
+					8'd23: begin
+						SPI_Addr <= 8'h2D;
+						SND_DATA <= CROSS_POINT_SWITCH;
+						SPI_STAT <= SPI_REQ;
+						SPI_New_Word <= 1'b1;
+					end	
+					
+
+					8'd24: begin
 						SPI_Addr <= 8'hFF;
 						SND_DATA <= DEVICE_UPDATE_EN;
 						SPI_STAT <= SPI_REQ;
 						SPI_New_Word <= 1'b1;
-					end		
+					end			
+
+					
+
 							/*	
 																		
 					8'd15: begin
@@ -186,76 +248,8 @@ parameter
 						SPI_New_Word <= 1'b1;
 					end				
 					
-					
+					*/
 
-																
-					8'd16: begin
-						SPI_Addr <= 8'h19;
-						SND_DATA <= USER_PATT1_LSB;
-						SPI_STAT <= SPI_REQ;
-						SPI_New_Word <= 1'b1;
-					end										
-					8'd17: begin
-						SPI_Addr <= 8'h1A;
-						SND_DATA <= USER_PATT1_MSB;
-						SPI_STAT <= SPI_REQ;
-						SPI_New_Word <= 1'b1;
-					end										
-					8'd18: begin
-						SPI_Addr <= 8'h1B;
-						SND_DATA <= USER_PATT2_LSB;
-						SPI_STAT <= SPI_REQ;
-						SPI_New_Word <= 1'b1;
-					end										
-					8'd19: begin
-						SPI_Addr <= 8'h1C;
-						SND_DATA <= USER_PATT2_MSB;
-						SPI_STAT <= SPI_REQ;
-						SPI_New_Word <= 1'b1;
-					end										
-					8'd20: begin
-						SPI_Addr <= 8'h21;
-						SND_DATA <= SERIAL_CONTROL;
-						SPI_STAT <= SPI_REQ;
-						SPI_New_Word <= 1'b1;
-					end										
-					8'd21: begin
-						SPI_Addr <= 8'h22;
-						SND_DATA <= SERIAL_CH_STAT;
-						SPI_STAT <= SPI_REQ;
-						SPI_New_Word <= 1'b1;
-					end										
-					8'd22: begin
-						SPI_Addr <= 8'h2B;
-						SND_DATA <= FLEX_FILTER;
-						SPI_STAT <= SPI_REQ;
-						SPI_New_Word <= 1'b1;
-					end										
-					8'd23: begin
-						SPI_Addr <= 8'h2C;
-						SND_DATA <= ANALOG_INPUT;
-						SPI_STAT <= SPI_REQ;
-						SPI_New_Word <= 1'b1;
-					end										
-					8'd24: begin
-						SPI_Addr <= 8'h2D;
-						SND_DATA <= CROSS_POINT_SWITCH;
-						SPI_STAT <= SPI_REQ;
-						SPI_New_Word <= 1'b1;
-					end	
-
-					8'd25: begin
-						SPI_Addr <= 8'hFF;
-						SND_DATA <= DEVICE_UPDATE_EN;
-						SPI_STAT <= SPI_REQ;
-						SPI_New_Word <= 1'b1;
-					end			
-					8'd26: begin
-						SPI_Addr <= 8'hFF;
-						SND_DATA <=DEVICE_UPDATE_DIS; 
-						SPI_STAT <= SPI_REQ;
-						SPI_New_Word <= 1'b1;
-					end	
 					/*
 					// delay for ch A
 					8'd27: begin

@@ -190,28 +190,17 @@ module Receive(
 	reg [127:0] DynamicDelay_Start;  
 	always @(*) begin
 		if(Focus_Num == 2'b10) begin
-			DynamicDelay_Start <= 128'h00FB00EB00DB00CA00BA00AA009A0089;  //outside 16ch
+			DynamicDelay_Start <= 128'h0096008D0083007900700066005C0052;  //outside 16ch
 		end
 		else begin
-			DynamicDelay_Start <= 128'h00790069005900490038002800180008;  //center 16ch
+			DynamicDelay_Start <= 128'h0049003F0035002B00220018000E0004;  //center 16ch
 		end
 	end
 	
 
+
 	
-	
-	/*
-	//for F=70, fixed delay
-	reg [127:0] DynamicDelay_Start;  
-	always @(*) begin
-		if(Focus_Num == 2'b10) begin
-			DynamicDelay_Start <= 128'h001A0014000E000A0006000300010000;  //outside 16ch
-		end
-		else begin
-			DynamicDelay_Start <= 128'h001A0014000E000A0006000300010000;  //center 16ch
-		end
-	end
-	*/
+
 
 
 
@@ -230,8 +219,8 @@ module Receive(
 	
 	parameter 
 	  //W_OUTSIDE = 64'h006B7C8D9DACBBC9;
-	 // W_OUTSIDE =   64'hFFFFFFFFFFFFFFFF;
-	  W_OUTSIDE =   64'hB2BBC4CCD4DBE2E8;
+	  W_OUTSIDE =   64'hFFFFFFFFFFFFFFFF;
+	//  W_OUTSIDE =   64'hB2BBC4CCD4DBE2E8;
 	  
 	
 	wire [63:0] W_CENTER;
@@ -396,8 +385,8 @@ module Receive(
 				DAS_Value_IN <= AD_CH1_Valid[20:8] + AD_CH2_Valid[20:8] + AD_CH3_Valid[20:8] + AD_CH4_Valid[20:8] + AD_CH5_Valid[20:8] + AD_CH6_Valid[20:8] + AD_CH7_Valid[20:8] + AD_CH8_Valid[20:8]; 
 				
 				if((Focus_Num == 2'b11))  begin
-					DAS_Value <= DAS_Value_IN;
-					//DAS_Value <=DAS_Value_IN[15:0]+ DAS_RF_Value[15:0]; 
+					//DAS_Value <= DAS_Value_IN;
+					DAS_Value <=DAS_Value_IN[15:0]+ DAS_RF_Value[15:0]; 
 				end
 				else begin
 					DAS_Value <= DAS_Value_IN;

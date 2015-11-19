@@ -1,11 +1,5 @@
 <sld_project_info>
-  <project>
-    <hash md5_digest_80b="87b6bc81aa162f1308dd"/>
-  </project>
-  <file_info>
-    <file device="EP3C40F484C8" path="ArrayUltrasound.sof" usercode="0xFFFFFFFF"/>
-  </file_info>
-  <hub_info hub_ir_width="6" ir_width="5" node_addr_width="3" node_count="7"/>
+  <hub_info ir_width="5" node_count="7"/>
   <node_info>
     <node hpath="Transmit:Transmit_Inst|Test_Line:Test_Line_inst|altsyncram:altsyncram_component|altsyncram_tdb1:auto_generated|sld_mod_ram_rom:mgl_prim2" instance_id="0" mfg_id="110" node_id="3" sld_node_info="0x8186E00" version="1">
       <parameters>

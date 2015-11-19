@@ -1,39 +1,36 @@
 module Receive(
-	input             AD_CLK,
-	input [11:0]      Data_A,Data_B,Data_C,Data_D,Data_E,Data_F,Data_G,Data_H,
-	input [7:0]       Line_Num,         //Line Num,256 Lines totally,0~255
-	input [1:0]       Focus_Num,        //Focus_num ,4 totally
-	input             Pr_Gate,          //prepare for everythings
-	input             RX_Gate,          // Start Transmit
-	input             Sample_Gate,
-	input             End_Gate,
-	output reg        So_Gate,         //output Enable
+	input AD_CLK,
+	input [11:0] Data_A,Data_B,Data_C,Data_D,Data_E,Data_F,Data_G,Data_H,
+	input [7:0] Line_Num,         //Line Num,256 Lines totally,0~255
+	input [1:0] Focus_Num,        //Focus_num ,4 totally
+	input Pr_Gate,          //prepare for everythings
+	input RX_Gate,          // Start Transmit
+	input Sample_Gate,
+	input End_Gate,
+	output reg So_Gate,         //output Enable
 	output reg [14:0] DAS_Value,
-	output [7:0]      Coheren_Coff
+	output [7:0] Coheren_Coff
 
 );
-  
-  
+    
 	reg [15:0] Wr_addr;
-	
 	reg [15:0] Rd_addr;
+	reg Wr_En;
 	
-	reg        Wr_En;
-	
-	localparam  MAX_COARSE_DELAY = 16'd200;                 //wait   the  max  delay arrive // 
+	parameter
+		MAX_COARSE_DELAY = 16'd400;
 		
 
 		
-	always @(posedge AD_CLK or posedge Sample_Gate) begin  //
-		if(Sample_Gate)
-	   	begin
-			  Wr_addr <= 16'd2;
-			  Wr_En <= 1'b0;
-		   end
+	always @(posedge AD_CLK or posedge Sample_Gate) begin  // 50ns width, son is 2 counter
+		if(Sample_Gate) begin
+			Wr_addr <= 16'd2;
+			Wr_En <= 1'b0;
+		end
 		else begin
 		    
-			if(Wr_addr <= 16'd15000) begin                 //  300us
-			 	 Wr_En <= 1'b1;
+			if(Wr_addr <= 16'd15000) begin//  300us
+				Wr_En <= 1'b1;
 				if(End_Gate) 
 					Wr_addr <= 16'd16000;
 				else
@@ -57,51 +54,30 @@ module Receive(
 	
 	
 	reg [15:0] Rd_Addr1;
-	
 	reg [15:0] Rd_Addr2;
-	
 	reg [15:0] Rd_Addr3;
-	
 	reg [15:0] Rd_Addr4;
-	
 	reg [15:0] Rd_Addr5;
-	
 	reg [15:0] Rd_Addr6;
-	
 	reg [15:0] Rd_Addr7;
-	
 	reg [15:0] Rd_Addr8;
 	
 	wire [12:0] AD_CH1;
-	
 	wire [12:0] AD_CH2;
-	
 	wire [12:0] AD_CH3;
-	
 	wire [12:0] AD_CH4;
-	
 	wire [12:0] AD_CH5;
-	
 	wire [12:0] AD_CH6;
-	
 	wire [12:0] AD_CH7;
-	
 	wire [12:0] AD_CH8;		
 
 	reg [20:0] AD_CH1_Valid;
-	
 	reg [20:0] AD_CH2_Valid;
-	
 	reg [20:0] AD_CH3_Valid;
-	
 	reg [20:0] AD_CH4_Valid;
-	
 	reg [20:0] AD_CH5_Valid;
-	
 	reg [20:0] AD_CH6_Valid;
-	
 	reg [20:0] AD_CH7_Valid;
-	
 	reg [20:0] AD_CH8_Valid;			
 	
 	
@@ -110,141 +86,121 @@ module Receive(
 	
     
 	DPRAM	DPRAM_inst1 (
-		.data      (Data_A ),
+		.data ( Data_A ),
 		.rdaddress (Rd_Addr1[8:0]),
-		.rdclock   (!AD_CLK ),
-		.wraddress ( Wr_addr[8:0] ),     //512,circle loop 
-		.wrclock   (!AD_CLK  ),
-		.wren      (Wr_En ),
-		.q         (AD_CH1 )
+		.rdclock ( !AD_CLK ),
+		.wraddress ( Wr_addr[8:0] ),
+		.wrclock ( !AD_CLK  ),
+		.wren ( Wr_En ),
+		.q ( AD_CH1 )
 	);
 	
 	DPRAM	DPRAM_inst2 (
-		.data      (Data_B ),
+		.data ( Data_B ),
 		.rdaddress (Rd_Addr2[8:0]),
-		.rdclock   (!AD_CLK  ),
+		.rdclock ( !AD_CLK  ),
 		.wraddress ( Wr_addr[8:0] ),
-		.wrclock   (!AD_CLK  ),
-		.wren      (Wr_En ),
-		.q         (AD_CH2 )
+		.wrclock ( !AD_CLK  ),
+		.wren ( Wr_En ),
+		.q ( AD_CH2 )
 	);
 
 	DPRAM	DPRAM_inst3 (
-		.data      (Data_C ),
+		.data ( Data_C ),
 		.rdaddress (Rd_Addr3[8:0]),
-		.rdclock   (!AD_CLK  ),
-		.wraddress (Wr_addr[8:0] ),
-		.wrclock   (!AD_CLK  ),
-		.wren      (Wr_En ),
-		.q         (AD_CH3 )
+		.rdclock ( !AD_CLK  ),
+		.wraddress ( Wr_addr[8:0] ),
+		.wrclock ( !AD_CLK  ),
+		.wren ( Wr_En ),
+		.q ( AD_CH3 )
 	);
 
 	DPRAM	DPRAM_inst4 (
-		.data      (Data_D ),
+		.data ( Data_D ),
 		.rdaddress (Rd_Addr4[8:0]),
-		.rdclock   (!AD_CLK  ),
-		.wraddress (Wr_addr[8:0] ),
-		.wrclock   (!AD_CLK  ),
-		.wren      (Wr_En ),
-		.q         (AD_CH4 )
+		.rdclock ( !AD_CLK  ),
+		.wraddress ( Wr_addr[8:0] ),
+		.wrclock ( !AD_CLK  ),
+		.wren ( Wr_En ),
+		.q ( AD_CH4 )
 	);
 
 	DPRAM	DPRAM_inst5 (
-		.data      (Data_E ),
+		.data ( Data_E ),
 		.rdaddress (Rd_Addr5[8:0]),
-		.rdclock   (!AD_CLK  ),
-		.wraddress (Wr_addr[8:0] ),
-		.wrclock   (!AD_CLK  ),
-		.wren      (Wr_En ),
-		.q         (AD_CH5 )
+		.rdclock ( !AD_CLK  ),
+		.wraddress ( Wr_addr[8:0] ),
+		.wrclock ( !AD_CLK  ),
+		.wren ( Wr_En ),
+		.q ( AD_CH5 )
 	);
 
 	DPRAM	DPRAM_inst6 (
-		.data      (Data_F ),
+		.data ( Data_F ),
 		.rdaddress (Rd_Addr6[8:0]),
-		.rdclock   (!AD_CLK  ),
-		.wraddress (Wr_addr[8:0] ),
-		.wrclock   (!AD_CLK  ),
-		.wren      (Wr_En ),
-		.q         (AD_CH6 )
+		.rdclock ( !AD_CLK  ),
+		.wraddress ( Wr_addr[8:0] ),
+		.wrclock ( !AD_CLK  ),
+		.wren ( Wr_En ),
+		.q ( AD_CH6 )
 	);
 	
 
 	DPRAM	DPRAM_inst7 (
-		.data      (Data_G ),
+		.data ( Data_G ),
 		.rdaddress (Rd_Addr7[8:0]),
-		.rdclock   (!AD_CLK),
-		.wraddress (Wr_addr[8:0] ),
-		.wrclock   (!AD_CLK  ),
-		.wren      (Wr_En ),
-		.q         (AD_CH7 )
+		.rdclock ( !AD_CLK  ),
+		.wraddress ( Wr_addr[8:0] ),
+		.wrclock ( !AD_CLK  ),
+		.wren ( Wr_En ),
+		.q ( AD_CH7 )
 	);
 
 	DPRAM	DPRAM_inst8 (
-		.data      (Data_H ),
+		.data ( Data_H ),
 		.rdaddress (Rd_Addr8[8:0]),
-		.rdclock   (!AD_CLK  ),
-		.wraddress (Wr_addr[8:0] ),
-		.wrclock   (!AD_CLK  ),
-		.wren      (Wr_En ),
-		.q         (AD_CH8 )
+		.rdclock ( !AD_CLK  ),
+		.wraddress ( Wr_addr[8:0] ),
+		.wrclock ( !AD_CLK  ),
+		.wren ( Wr_En ),
+		.q ( AD_CH8 )
 	);
 
 	
 	
 	wire [7:0] Dynamic_Pace;
-	
 	reg [14:0] Dynamic_Addr;
 	
-	always @(*) 
-	 begin
+	always @(*) begin
 		if(Focus_Num == 2'b10)
-		
 			Dynamic_Addr <= {1'b1,Rd_addr[13:0]};
 		else 
-		
 			Dynamic_Addr <= {1'b0,Rd_addr[13:0]};
 	end
 	
-	
-	
 	DynamicFocus	DynamicFocus_inst (
 		.address (Dynamic_Addr ),  //even/odd,addr,  
-		.clock   (!AD_CLK  ),
-		.q       (Dynamic_Pace )
+		.clock ( !AD_CLK  ),
+		.q ( Dynamic_Pace )
 	);
 	
 	
 	//save M9K  use logic cell
 	
 	reg [127:0] DynamicDelay_Start;  
-	
-	always @(*) begin
-		if(Focus_Num == 2'b10)
-	   	begin
-			DynamicDelay_Start <= 128'h0097008D0083007A00700066005D0053;  //outside 16ch
-		  end                       //0097008D0083007A00700066005D0053
-		else 
-		  begin
-			DynamicDelay_Start <= 128'h0049003F0036002C00220018000F0005;  //center 16ch
-		 end
-	end                           //0049003F0036002C00220018000F0005
-	
-
-	
-	
-	/*
-	//for F=70, fixed delay
-	reg [127:0] DynamicDelay_Start;  
 	always @(*) begin
 		if(Focus_Num == 2'b10) begin
-			DynamicDelay_Start <= 128'h001A0014000E000A0006000300010000;  //outside 16ch
+			DynamicDelay_Start <= 128'h0096008D0083007900700066005C0052;  //outside 16ch
 		end
 		else begin
-			DynamicDelay_Start <= 128'h001A0014000E000A0006000300010000;  //center 16ch
+			DynamicDelay_Start <= 128'h0049003F0035002B00220018000E0004;  //center 16ch
 		end
 	end
-	*/
+	
+
+
+	
+
 
 
 
@@ -263,8 +219,8 @@ module Receive(
 	
 	parameter 
 	  //W_OUTSIDE = 64'h006B7C8D9DACBBC9;
-	 // W_OUTSIDE =   64'hFFFFFFFFFFFFFFFF;
-	  W_OUTSIDE =   64'hB2BBC4CCD4DBE2E8;
+	  W_OUTSIDE =   64'hFFFFFFFFFFFFFFFF;
+	//  W_OUTSIDE =   64'hB2BBC4CCD4DBE2E8;
 	  
 	
 	wire [63:0] W_CENTER;
@@ -272,13 +228,11 @@ module Receive(
 	wire [10:0] Apod_Addr;
 	
 	assign Apod_Addr = (Rd_addr<16'd2048)?Rd_addr[10:0]:11'd2047;
-	
-	
 	Apod Apod_Inst 
 	(
 		.address(Apod_Addr),
-		.clock  (AD_CLK),
-		.q     (W_CENTER)
+		.clock(AD_CLK),
+		.q(W_CENTER)
 	);
 	
 	//assign {w1,w2,w3,w4,w5,w6,w7,w8} =(Focus_Num == 2'b11 || Focus_Num == 2'b10)?W_OUTSIDE:W_CENTER;
@@ -432,7 +386,7 @@ module Receive(
 				
 				if((Focus_Num == 2'b11))  begin
 					//DAS_Value <= DAS_Value_IN;
-					DAS_Value <=DAS_Value_IN[15:0]+ DAS_RF_Value[15:0]; 
+					DAS_Value <={1'b0,DAS_Value_IN[15:1]}+ {1'b0,DAS_RF_Value[15:1]}; 
 				end
 				else begin
 					DAS_Value <= DAS_Value_IN;

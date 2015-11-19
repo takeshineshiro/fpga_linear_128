@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pin_planner>
+	<pin_info>
+		<pin name="DCO" direction="Input" source="Hierarchy Database" diff_pair_node="DCO(n)" >
+		</pin>
+		<pin name="FCO" direction="Input" source="Hierarchy Database" diff_pair_node="FCO(n)" >
+		</pin>
+		<pin name="OUTA" direction="Input" source="Hierarchy Database" diff_pair_node="OUTA(n)" >
+		</pin>
+		<pin name="OUTB" direction="Input" source="Hierarchy Database" diff_pair_node="OUTB(n)" >
+		</pin>
+		<pin name="OUTC" direction="Input" source="Hierarchy Database" diff_pair_node="OUTC(n)" >
+		</pin>
+		<pin name="OUTD" direction="Input" source="Hierarchy Database" diff_pair_node="OUTD(n)" >
+		</pin>
+		<pin name="OUTE" direction="Input" source="Hierarchy Database" diff_pair_node="OUTE(n)" >
+		</pin>
+		<pin name="OUTF" direction="Input" source="Hierarchy Database" diff_pair_node="OUTF(n)" >
+		</pin>
+		<pin name="OUTG" direction="Input" source="Hierarchy Database" diff_pair_node="OUTG(n)" >
+		</pin>
+		<pin name="OUTH" direction="Input" source="Hierarchy Database" diff_pair_node="OUTH(n)" >
+		</pin>
+		<pin name="FCO(n)" direction="Input" source="Assignments" diff_pair_node="FCO" >
+		</pin>
+		<pin name="OUTA(n)" direction="Input" source="Assignments" diff_pair_node="OUTA" >
+		</pin>
+		<pin name="OUTB(n)" direction="Input" source="Assignments" diff_pair_node="OUTB" >
+		</pin>
+		<pin name="OUTC(n)" direction="Input" source="Assignments" diff_pair_node="OUTC" >
+		</pin>
+		<pin name="OUTD(n)" direction="Input" source="Assignments" diff_pair_node="OUTD" >
+		</pin>
+		<pin name="OUTE(n)" direction="Input" source="Assignments" diff_pair_node="OUTE" >
+		</pin>
+		<pin name="OUTF(n)" direction="Input" source="Assignments" diff_pair_node="OUTF" >
+		</pin>
+		<pin name="OUTG(n)" direction="Input" source="Assignments" diff_pair_node="OUTG" >
+		</pin>
+		<pin name="OUTH(n)" direction="Input" source="Assignments" diff_pair_node="OUTH" >
+		</pin>
+		<pin name="DCO(n)" direction="Input" source="Assignments" diff_pair_node="DCO" >
+		</pin>
+	</pin_info>
+	<buses>
+	</buses>
+	<group_file_association>
+	</group_file_association>
+	<pin_planner_file_specifies>
+	</pin_planner_file_specifies>
+</pin_planner>

@@ -1,15 +1,15 @@
-Fitter Status : Successful - Fri Nov 06 11:46:16 2015
-Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version
+Fitter Status : Successful - Wed Nov 11 16:37:16 2015
+Quartus II Version : 9.0 Build 132 02/25/2009 SJ Full Version
 Revision Name : ArrayUltrasound
 Top-level Entity Name : ArrayUltrasound
 Family : Cyclone III
 Device : EP3C40F484C8
 Timing Models : Final
-Total logic elements : 13,743 / 39,600 ( 35 % )
-    Total combinational functions : 10,505 / 39,600 ( 27 % )
-    Dedicated logic registers : 11,890 / 39,600 ( 30 % )
-Total registers : 11938
-Total pins : 80 / 332 ( 24 % )
+Total logic elements : 14,841 / 39,600 ( 37 % )
+    Total combinational functions : 11,006 / 39,600 ( 28 % )
+    Dedicated logic registers : 12,277 / 39,600 ( 31 % )
+Total registers : 12325
+Total pins : 118 / 332 ( 36 % )
 Total virtual pins : 0
 Total memory bits : 853,016 / 1,161,216 ( 73 % )
 Embedded Multiplier 9-bit elements : 16 / 252 ( 6 % )

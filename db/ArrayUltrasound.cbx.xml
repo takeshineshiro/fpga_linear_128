@@ -31,7 +31,7 @@
 		<CBX_INST_ENTRY INSTANCE_NAME="|ArrayUltrasound|Receive:Receive_Inst|Coherent_Coff:Coherent_Coff_Inst|fft_8:U_fft8|butter_2:U2_unit3|mult16_12:mult16_12_imag0|lpm_mult:lpm_mult_component" CBX_FILE_NAME="mult_85p.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|ArrayUltrasound|Receive:Receive_Inst|Coherent_Coff:Coherent_Coff_Inst|mult16:mult16_INST_22|altsquare:altsquare_component" CBX_FILE_NAME="altsquare_9ne.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|ArrayUltrasound|Receive:Receive_Inst|DPRAM:DPRAM_inst2|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_jgj1.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|ArrayUltrasound|Receive:Receive_Inst|DynamicFocus:DynamicFocus_inst|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_a1b1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ArrayUltrasound|Receive:Receive_Inst|DynamicFocus:DynamicFocus_inst|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_nv91.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|ArrayUltrasound|lf:LF_Inst|lf_ast:lf_ast_inst|auk_dspip_avalon_streaming_sink_fir_90:sink|scfifo:\normal_fifo:fifo_eab_off:in_fifo|a_fffifo:subfifo|lpm_mux:col_data_out_mux" CBX_FILE_NAME="mux_lrc.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|ArrayUltrasound|LVDS_AD:LVDS_AD_inst_A|altlvds_rx:altlvds_rx_component" CBX_FILE_NAME="LVDS_AD_lvds_rx.v"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|ArrayUltrasound|Receive:Receive_Inst|Coherent_Coff:Coherent_Coff_Inst|fft_8:U_fft8|butter_2:U2_unit3|mult16_12:mult16_12_imag1|lpm_mult:lpm_mult_component" CBX_FILE_NAME="mult_85p.tdf"/>
@@ -63,7 +63,7 @@
 		<CBX_INST_ENTRY INSTANCE_NAME="|ArrayUltrasound|ABS:ABS_inst|lpm_abs:lpm_abs_component|lpm_add_sub:adder" CBX_FILE_NAME="add_sub_o0d.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|ArrayUltrasound|Receive:Receive_Inst|mult12_8:mult12_8_Inst3|lpm_mult:lpm_mult_component" CBX_FILE_NAME="mult_hap.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|ArrayUltrasound|Receive:Receive_Inst|mult12_8:mult12_8_Inst4|lpm_mult:lpm_mult_component" CBX_FILE_NAME="mult_hap.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|ArrayUltrasound|Receive:Receive_Inst|Coherent_Coff:Coherent_Coff_Inst|DIV27_19:DIV27_19_inst|lpm_divide:lpm_divide_component" CBX_FILE_NAME="lpm_divide_5bv.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|ArrayUltrasound|Receive:Receive_Inst|Coherent_Coff:Coherent_Coff_Inst|DIV27_19:DIV27_19_inst|lpm_divide:lpm_divide_component" CBX_FILE_NAME="lpm_divide_1bv.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|ArrayUltrasound|Receive:Receive_Inst|mult12_8:mult12_8_Inst5|lpm_mult:lpm_mult_component" CBX_FILE_NAME="mult_hap.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|ArrayUltrasound|Receive:Receive_Inst|mult12_8:mult12_8_Inst6|lpm_mult:lpm_mult_component" CBX_FILE_NAME="mult_hap.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|ArrayUltrasound|Receive:Receive_Inst|Coherent_Coff:Coherent_Coff_Inst|mult16:mult16_INST_1|altsquare:altsquare_component" CBX_FILE_NAME="altsquare_9ne.tdf"/>

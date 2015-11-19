@@ -41,7 +41,7 @@ set_global_assignment -name DEVICE EP3C40F484C8
 set_global_assignment -name TOP_LEVEL_ENTITY ArrayUltrasound
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 9.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "11:52:44  AUGUST 14, 2014"
-set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
+set_global_assignment -name LAST_QUARTUS_VERSION 9.0
 set_global_assignment -name USE_GENERATED_PHYSICAL_CONSTRAINTS OFF -section_id eda_blast_fpga
 set_global_assignment -name CYCLONE_OPTIMIZATION_TECHNIQUE SPEED
 set_global_assignment -name DEVICE_FILTER_PIN_COUNT 484
@@ -50,10 +50,12 @@ set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS OFF
 set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
 set_global_assignment -name USE_CONFIGURATION_DEVICE ON
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
 set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
+set_global_assignment -name MISC_FILE "D:/畜牧业B超/阵列方案/程序/ArrayUltrasound/ArrayUltrasound.dpf"
 set_global_assignment -name CYCLONEIII_CONFIGURATION_DEVICE EPCS16
 set_global_assignment -name FORCE_CONFIGURATION_VCCIO ON
 set_global_assignment -name ENABLE_SIGNALTAP OFF
@@ -67,6 +69,7 @@ set_instance_assignment -name IO_STANDARD LVDS -to OUTE
 set_instance_assignment -name IO_STANDARD LVDS -to OUTF
 set_instance_assignment -name IO_STANDARD LVDS -to OUTG
 set_instance_assignment -name IO_STANDARD LVDS -to OUTH
+set_instance_assignment -name IO_STANDARD LVDS -to DCO
 set_instance_assignment -name IO_STANDARD LVDS -to FCO
 set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
 set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to PWDN
@@ -80,9 +83,21 @@ set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to E_P
 set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to E_N
 set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to E_N
 set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to E_P
-set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
 set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
+set_global_assignment -name LL_ENABLED ON -section_id "LVDS_AD:LVDS_AD_inst_A"
+set_global_assignment -name LL_AUTO_SIZE ON -section_id "LVDS_AD:LVDS_AD_inst_A"
+set_global_assignment -name LL_STATE FLOATING -section_id "LVDS_AD:LVDS_AD_inst_A"
+set_global_assignment -name LL_RESERVED OFF -section_id "LVDS_AD:LVDS_AD_inst_A"
+set_global_assignment -name LL_RESERVED_IS_LIMITED OFF -section_id "LVDS_AD:LVDS_AD_inst_A"
+set_global_assignment -name LL_SOFT OFF -section_id "LVDS_AD:LVDS_AD_inst_A"
+set_global_assignment -name LL_SECURITY_ROUTING_INTERFACE OFF -section_id "LVDS_AD:LVDS_AD_inst_A"
+set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "LVDS_AD:LVDS_AD_inst_A"
+set_global_assignment -name LL_WIDTH 1 -section_id "LVDS_AD:LVDS_AD_inst_A"
+set_global_assignment -name LL_HEIGHT 1 -section_id "LVDS_AD:LVDS_AD_inst_A"
+set_global_assignment -name LL_ORIGIN X1_Y1 -section_id "LVDS_AD:LVDS_AD_inst_A"
+set_instance_assignment -name LL_MEMBER_OF "LVDS_AD:LVDS_AD_inst_A" -to "LVDS_AD:LVDS_AD_inst_A" -section_id "LVDS_AD:LVDS_AD_inst_A"
 set_global_assignment -name CYCLONEII_OPTIMIZATION_TECHNIQUE AREA
+set_global_assignment -name MISC_FILE "D:/畜牧业B超/阵列方案/程序/64阵元方案/ArrayUltrasound/ArrayUltrasound.dpf"
 set_location_assignment PIN_H22 -to ADCLK
 set_location_assignment PIN_D20 -to AX[3]
 set_location_assignment PIN_C20 -to AX[0]
@@ -91,6 +106,14 @@ set_location_assignment PIN_G15 -to AX[2]
 set_location_assignment PIN_H15 -to AY[1]
 set_location_assignment PIN_H14 -to AY[0]
 set_location_assignment PIN_G14 -to AX[1]
+set_location_assignment PIN_A9 -to B_Data[7]
+set_location_assignment PIN_B8 -to B_Data[6]
+set_location_assignment PIN_A8 -to B_Data[5]
+set_location_assignment PIN_B7 -to B_Data[4]
+set_location_assignment PIN_A7 -to B_Data[3]
+set_location_assignment PIN_B6 -to B_Data[2]
+set_location_assignment PIN_A6 -to B_Data[1]
+set_location_assignment PIN_B5 -to B_Data[0]
 set_location_assignment PIN_K19 -to E_N[15]
 set_location_assignment PIN_K21 -to E_N[14]
 set_location_assignment PIN_J18 -to E_N[13]
@@ -146,18 +169,55 @@ set_location_assignment PIN_AA20 -to STBY
 set_location_assignment PIN_AA19 -to SPI_CLK
 set_location_assignment PIN_AA18 -to SPI_CS
 set_location_assignment PIN_AB19 -to SPI_Data
+set_location_assignment PIN_B4 -to SPCK
+set_location_assignment PIN_A5 -to SPDA
+set_location_assignment PIN_A4 -to SPENA
+set_location_assignment PIN_A19 -to R_Data[7]
+set_location_assignment PIN_B18 -to R_Data[6]
+set_location_assignment PIN_A18 -to R_Data[5]
+set_location_assignment PIN_B17 -to R_Data[4]
+set_location_assignment PIN_A17 -to R_Data[3]
+set_location_assignment PIN_B16 -to R_Data[2]
+set_location_assignment PIN_A16 -to R_Data[1]
+set_location_assignment PIN_B15 -to R_Data[0]
+set_location_assignment PIN_A15 -to G_Data[7]
+set_location_assignment PIN_B14 -to G_Data[6]
+set_location_assignment PIN_A14 -to G_Data[5]
+set_location_assignment PIN_B13 -to G_Data[4]
+set_location_assignment PIN_A13 -to G_Data[3]
+set_location_assignment PIN_B10 -to G_Data[2]
+set_location_assignment PIN_A10 -to G_Data[1]
+set_location_assignment PIN_B9 -to G_Data[0]
 set_location_assignment PIN_E15 -to HV_SW_LE
 set_location_assignment PIN_C15 -to HV_SW_CLR
 set_location_assignment PIN_E16 -to HV_SW_CLK
 set_location_assignment PIN_C17 -to HV_SW_DOUT
+set_location_assignment PIN_B19 -to HS
+set_location_assignment PIN_B20 -to LCLK_o
 set_location_assignment PIN_T15 -to MT_CS
+set_location_assignment PIN_A3 -to LCD_PWM
+set_location_assignment PIN_B3 -to LCD_RST
 set_location_assignment PIN_G13 -to MT_Strobe
 set_location_assignment PIN_H16 -to MT_Data
+set_location_assignment PIN_A20 -to VS
 set_location_assignment PIN_AA17 -to sclk
 set_location_assignment PIN_AB17 -to sdin
 set_location_assignment PIN_AB18 -to sync
 set_location_assignment PIN_A12 -to sysclk
 set_location_assignment PIN_J2 -to HV_EN
+set_global_assignment -name LL_ENABLED ON -section_id "Transmit:Transmit_Inst"
+set_global_assignment -name LL_AUTO_SIZE ON -section_id "Transmit:Transmit_Inst"
+set_global_assignment -name LL_STATE FLOATING -section_id "Transmit:Transmit_Inst"
+set_global_assignment -name LL_RESERVED OFF -section_id "Transmit:Transmit_Inst"
+set_global_assignment -name LL_RESERVED_IS_LIMITED OFF -section_id "Transmit:Transmit_Inst"
+set_global_assignment -name LL_SOFT OFF -section_id "Transmit:Transmit_Inst"
+set_global_assignment -name LL_SECURITY_ROUTING_INTERFACE OFF -section_id "Transmit:Transmit_Inst"
+set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Transmit:Transmit_Inst"
+set_global_assignment -name LL_WIDTH 1 -section_id "Transmit:Transmit_Inst"
+set_global_assignment -name LL_HEIGHT 1 -section_id "Transmit:Transmit_Inst"
+set_global_assignment -name LL_ORIGIN X1_Y1 -section_id "Transmit:Transmit_Inst"
+set_instance_assignment -name LL_MEMBER_OF "Transmit:Transmit_Inst" -to "Transmit:Transmit_Inst" -section_id "Transmit:Transmit_Inst"
+set_instance_assignment -name PARTITION_HIERARCHY trans_f5bc4aca8ade15b5bdc5aedde831c7f1 -to "Transmit:Transmit_Inst" -section_id "Transmit:Transmit_Inst"
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id "Transmit:Transmit_Inst"
 set_global_assignment -name PARTITION_COLOR 52377 -section_id "Transmit:Transmit_Inst"
 set_global_assignment -name VERILOG_FILE butter_unit.v
@@ -219,8 +279,10 @@ set_location_assignment PIN_J1 -to CC3200_SPI_CLK
 set_location_assignment PIN_F1 -to CC3200_SPI_CS
 set_location_assignment PIN_H1 -to CC3200_SPI_DIN
 set_location_assignment PIN_H2 -to CC3200_SPI_DOUT
+set_global_assignment -name MISC_FILE "D:/畜牧业B超/阵列方案/程序/64阵元方案/ArrayUltrasound - 16T32R-R40/ArrayUltrasound.dpf"
 set_global_assignment -name SIGNALTAP_FILE CC3200.stp
 set_location_assignment PIN_F2 -to Envelop
+set_global_assignment -name MISC_FILE "D:/畜牧业B超/阵列方案/程序/64阵元方案/ArrayUltrasound - 16T32R-R40 - wifi/ArrayUltrasound.dpf"
 set_global_assignment -name QIP_FILE IMG_BUFFER.qip
 set_global_assignment -name QIP_FILE Test_Line.qip
 set_global_assignment -name MIF_FILE Test_Line.mif
@@ -228,10 +290,4 @@ set_global_assignment -name QIP_FILE TGC_ROM.qip
 set_global_assignment -name MIF_FILE tgc.mif
 set_global_assignment -name QIP_FILE IMG_TRI_BUFFER.qip
 set_global_assignment -name SIGNALTAP_FILE "CC3200-256lines.stp"
-set_global_assignment -name TIMEQUEST_DO_CCPP_REMOVAL ON
 set_global_assignment -name OPTIMIZE_POWER_DURING_FITTING "EXTRA EFFORT"
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id "Transmit:Transmit_Inst"
-
-
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
-set_instance_assignment -name PARTITION_HIERARCHY trans_f5bc4aca8ade15b5bdc5aedde831c7f1 -to "Transmit:Transmit_Inst" -section_id "Transmit:Transmit_Inst"

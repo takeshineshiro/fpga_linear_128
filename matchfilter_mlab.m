@@ -12,19 +12,20 @@
 %FILTER PARAMETER                                                                                                                       
 %Input Data Type:	UnSigned
 %Input Data Width:	15
-%FIR Width (Full Calculation Width Before Output Width Adjust) :   30
+%LSB Truncated bits:%LSB Rounded bits  :1
+%FIR Width (Full Calculation Width Before Output Width Adjust) :   31
 %-----------------------------------------------------------------------------------------------------------
 
 	%MegaWizard Scaled Coefficient Values
 	function  output = matchfilter_mlab_mat (stimulation, output)
-	coef_matrix=[3 10 14 13 11 14 17 12 1 2 17 26 7 -19 -15 13 17 -25 -62 -39 4 -17 -96 -123 -55 -6 -86 -203 -179 -38 -17 -206 -345 -181 79 -25 -490 -624 149 1418 2047 1418 149 -624 -490 -25 79 -181 -345 -206 -17 -38 -179 -203 -86 -6 -55 -123 -96 -17 4 -39 -62 -25 17 13 -15 -19 7 26 17 2 1 12 17 14 11 13 14 10 3 ];
+	coef_matrix=[6 -7 -27 -27 -15 9 10 -7 -20 13 74 110 72 -5 -42 1 55 9 -147 -281 -242 -50 100 51 -107 -97 216 612 684 302 -172 -234 154 377 -250 -1620 -2635 -2064 232 2911 4095 2911 232 -2064 -2635 -1620 -250 377 154 -234 -172 302 684 612 216 -97 -107 51 100 -50 -242 -281 -147 9 55 1 -42 -5 72 110 74 13 -20 -7 10 9 -15 -27 -27 -7 6 ];
 	INTER_FACTOR  = 1;
 	DECI_FACTOR  = 1; 
 	MSB_RM  = 0;
 	MSB_TYPE  = 0;
-	LSB_RM  = 0;
+	LSB_RM  = 1;
 	LSB_TYPE  = 0;
-	FIR_WIDTH  = 30;
+	FIR_WIDTH  = 31;
 	OUT_WIDTH  = FIR_WIDTH - MSB_RM - LSB_RM ;
 	DATA_WIDTH = 15;
             

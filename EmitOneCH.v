@@ -1,36 +1,31 @@
 
 module  EmitOneCH
 (
-  input         Transmit_CLK,                //100M            
-  input         RX_Gate,                    //Transmit Enable
-  input   [7:0] EmitDelay,                  //7th bit for Transmit Enable, 6:0 for Delay                   
-  input   [6:0] Emit_Width,                //Emit pulse width
-  output  reg   TXP,
-  output  reg   TXN
+  input   Transmit_CLK,               //80MHz            
+  input   RX_Gate,                    //Transmit Enable
+  input   [7:0] EmitDelay,            //7th bit for Transmit Enable, 6:0 for Delay                   
+  input   [6:0] Emit_Width,           //Emit pulse width
+  output  reg TXP,
+  output  reg TXN
   );  
     
-	 
-	 
   reg  [6:0]  Emit_Counter;
-  
   reg  [6:0]  Delay_Counter;
     
-	 
   always @(posedge Transmit_CLK or negedge RX_Gate)
   begin
-  	if(~RX_Gate) 
-	 begin
-  		Emit_Counter  <= 7'd0;
+  	if(~RX_Gate) begin
+  		Emit_Counter <= 7'd0;
   		Delay_Counter <= 8'd0;
-  		TXP           <= 1'b1;
-  		TXN           <= 1'b1;
+  		TXP <= 1'b1;
+  		TXN <= 1'b1;
   	end
   	else
   		begin
   		  if(Delay_Counter < EmitDelay[6:0] ) begin
   				Delay_Counter <= Delay_Counter + 1'b1;
-  				TXP           <= 1'b1;
-				TXN           <= 1'b1;
+  				TXP <= 1'b1;
+				TXN <= 1'b1;
 		  end
   		  else begin
 			if(~EmitDelay[7]) begin  //enble Emit

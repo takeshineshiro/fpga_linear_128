@@ -29,6 +29,7 @@ module Transmit(
 
 
 	reg [5:0] EMIT_WIDTH;
+/*
 	always @(*) begin
 		case(Focus_Num[1:0])
 			2'b00:  //20mm
@@ -41,7 +42,19 @@ module Transmit(
 				EMIT_WIDTH <= 6'd16; //3MHz
 		endcase
 	end
-  
+  */
+	always @(*) begin
+		case(Focus_Num[1:0])
+			2'b00:  //20mm
+				EMIT_WIDTH <= 6'd6; //8MHz
+			2'b01:  //40mm
+				EMIT_WIDTH <= 6'd7; //7.5MHz
+			2'b10:  //60mm
+				EMIT_WIDTH <= 6'd8; //6MHz
+			2'b11:  //80mm
+				EMIT_WIDTH <= 6'd8; //6MHz
+		endcase
+	end
 	
 	//replace rom for saving M9K ram
 	
@@ -58,110 +71,29 @@ module Transmit(
 	 reg [127:0] Delay_ALL;
 	always @(posedge Pr_Gate) begin
 	
-	/*
-		case(Test_q[2:0] )
-		
-		    //R=60mm
-		    //20mm
-			3'b00: begin
-			    
-				if(Line_Num[0]) // odd
-					Delay_ALL <= 128'h8000070D1215181A1A1A1815120D0700;
-				else            // even
-					Delay_ALL <= 128'h00070D1215181A1A1A1815120D070080;
-
-
-			end	
-			
-
-				
-		    
-		   // 40mm
-			3'b001:  begin
-				if(Line_Num[0]) // odd
-					Delay_ALL <= 128'h800004080B0D0F1011100F0D0B080400;
-				else            // even
-					Delay_ALL <= 128'h0004080B0D0F1011100F0D0B08040080;				
-
-
-
-			end
-
-            //60mm
-			3'b010:  begin
-
-			
-			    
-				if(Line_Num[0]) // odd
-					Delay_ALL <= 128'h80000406090B0C0D0D0D0C0B09060400;
-				else            // even
-					Delay_ALL <= 128'h000406090B0C0D0D0D0C0B0906040080;	
-
-	            
-			end		
-            
-            //80mm
-			3'b011:  begin
-
-			
-			    
-				if(Line_Num[0]) // odd
-					Delay_ALL <= 128'h8000030608090B0B0C0B0B0908060300;
-				else            // even
-					Delay_ALL <= 128'h00030608090B0B0C0B0B090806030080;	
-
-	            
-			end						
-			
-			
-			//100mm
-			3'b100:  begin
-			   if(Line_Num[0]) // odd
-					Delay_ALL <= 128'h8000030507090A0A0B0A0A0907050300;
-				else            // even
-					Delay_ALL <= 128'h00030507090A0A0B0A0A090705030080;	
-			
-	
-			end			                     
-
-			//120mm
-			3'b101:  begin
-			   if(Line_Num[0]) // odd
-					Delay_ALL <= 128'h800003050708090A0A0A090807050300;
-				else            // even
-					Delay_ALL <= 128'h0003050708090A0A0A09080705030080;	
-			
-	
-			end			                     
-
-
-
-		endcase	
-       */
-
 		case(Focus_Num[1:0] )
 		
-		    //R=60mm
-		    //20mm
+		    //L=40mm
+		    //10mm
 			2'b00: begin
 			    
 				if(Line_Num[0]) // odd
-					Delay_ALL <= 128'h8000070D1215181A1A1A1815120D0700;
+					Delay_ALL <= 128'h800004070A0C0D0E0E0E0D0C0A070400;
 				else            // even
-					Delay_ALL <= 128'h00070D1215181A1A1A1815120D070080;
-
+					Delay_ALL <= 128'h0004070A0C0D0E0E0E0D0C0A07040080;
+                   
 
 			end	
 			
 
 				
 		    
-		   // 40mm
+		   // 20mm
 			2'b01:  begin
 				if(Line_Num[0]) // odd
-					Delay_ALL <= 128'h800004080B0D0F1011100F0D0B080400;
+					Delay_ALL <= 128'h80000203050607070707070605030200;
 				else            // even
-					Delay_ALL <= 128'h0004080B0D0F1011100F0D0B08040080;				
+					Delay_ALL <= 128'h00020305060707070707060503020080;				
 
 
 
@@ -169,42 +101,29 @@ module Transmit(
 
 
             
-            //80mm
+            //30mm
 			2'b10:  begin	
 			
-			    /*
-			    //40mm
+				
+			    //30mm
 				if(Line_Num[0]) // odd
-					Delay_ALL <= 128'h800004080B0D0F1011100F0D0B080400;
+					Delay_ALL <= 128'h80000102030404050505040403020100;
 				else            // even
-					Delay_ALL <= 128'h0004080B0D0F1011100F0D0B08040080;	
-					
-				*/	
-			    // 80mm
-				if(Line_Num[0]) // odd
-					Delay_ALL <= 128'h8000030608090B0B0C0B0B0908060300;
-				else            // even
-					Delay_ALL <= 128'h00030608090B0B0C0B0B090806030080;	
+					Delay_ALL <= 128'h00010203040405050504040302010080;	
+				
 					
 			end						
 			
 			
-			//80mm
+			//30mm
 			2'b11:  begin
-			    /*
-				//40mm
+			    
+			     //30mm
 				if(Line_Num[0]) // odd
-					Delay_ALL <= 128'h800004080B0D0F1011100F0D0B080400;
+					Delay_ALL <= 128'h80000102030404050505040403020100;
 				else            // even
-					Delay_ALL <= 128'h0004080B0D0F1011100F0D0B08040080;	
-				*/	
-					
-			   // 80mm
-			   if(Line_Num[0]) // odd
-					Delay_ALL <= 128'h8000030608090B0B0C0B0B0908060300;
-				else            // even
-					Delay_ALL <= 128'h00030608090B0B0C0B0B090806030080;	
-			
+					Delay_ALL <= 128'h00010203040405050504040302010080;		
+			   
 			end			                     
 
 

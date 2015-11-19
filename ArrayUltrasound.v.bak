@@ -109,7 +109,7 @@ module ArrayUltrasound(
 	.Enable(),
 	.Zoom(Zoom),
 	.Gain(Gain),
-	.Trans_Data(Trans_Data[7:0]),
+	.Trans_Data(Trans_Data[8:1]),
 	.Trans_Addr(Trans_Addr)
 
 );
@@ -174,13 +174,13 @@ module ArrayUltrasound(
 		end
 		else begin
 			if(Focus_Num_Pre[1:0] == 2'b00) begin
-				Focus_Num_Pre[1:0] <= 2'b10;
+				Focus_Num_Pre[1:0] <= 2'b01;
 			end
-			/*
+		
 			else if(Focus_Num_Pre[1:0] == 2'b01) begin
 				Focus_Num_Pre[1:0] <= 2'b10;     
 			end
-		    */
+		   
 			else if(Focus_Num_Pre[1:0] == 2'b10) begin
 				Focus_Num_Pre[1:0] <= 2'b11;     
 			end
@@ -193,14 +193,6 @@ module ArrayUltrasound(
 			end			
 			
 		
-		   /*
-			if(Focus_Num_Pre[1:0] < 2'b11) begin
-					Focus_Num_Pre <= Focus_Num_Pre + 1'b1;
-			end
-			else begin
-				Focus_Num_Pre 	<= 2'b00;
-			end
-			*/
 		end
 	end
 	
@@ -220,16 +212,17 @@ module ArrayUltrasound(
 	
 	reg [31:0] Line_Period;
 	
+
 	always @(posedge Pr_Gate) begin
 		case(Focus_Num[1:0]) 
 			2'b00:           //
-				Line_Period=32'd12000;  //100us
+				Line_Period=32'd9000;   //60us
 			2'b01:
-				Line_Period=32'd12000;  //100us
+				Line_Period=32'd12000;  //70us
 			2'b10:
-				Line_Period=32'd29000; //250us
+				Line_Period=32'd18000;  //150us
 			2'b11:
-				Line_Period=32'd29000; //250us
+				Line_Period=32'd18000;  //150us
 		endcase
 	end
 
@@ -382,7 +375,8 @@ module ArrayUltrasound(
 					sync <= 1'b1;
 					Send_Counter <= Send_Counter + 1'b1;
 					//Send_Data <= {2'b0,{1'b0,TGC_Data[6:0]}+{2'b0,TGC_Data[6:1]}+{2'b0,Gain[6:1]},6'b0};
-					Send_Data <= {2'b0,8'h0,6'b0};  
+					Send_Data <= {2'b0,{1'b0,Gain[5:0],1'b0},6'b0};
+					//Send_Data <= {2'b0,8'h0,6'b0};  
 					//Send_Data <= {2'b0,8'h80,6'b0}; 
 				end
 				else if(Send_Counter <8'd19) begin
@@ -394,6 +388,7 @@ module ArrayUltrasound(
 					sync <= 1'b1;
 					Send_Counter <= 8'd0;
 				end	
+				
 				
 			end
 		end
@@ -444,6 +439,8 @@ module ArrayUltrasound(
     wire MF_Output_RDY;
     wire MF_Output_Valid;
     
+    //match 2-4 8-10 filter 
+    //80taps,
    	matchfilter MatchFilter_Inst(
 		.clk(AD_CLK),
 		.reset_n(1'b1),
@@ -519,7 +516,8 @@ module ArrayUltrasound(
 
   wire [12:0] Log_IN;
   
-  assign Log_IN =(LF_Data[30])?13'd0:((LF_Data[30:14] > 18'd8091)?13'd8191:LF_Data[26:14]);
+  //assign Log_IN =(LF_Data[30])?13'd0:((LF_Data[30:14] > 18'd8091)?13'd8191:LF_Data[26:14]);
+  assign Log_IN =(LF_Data[30])?13'd0:((LF_Data[30:12] > 18'd8091)?13'd8191:LF_Data[24:12]);
   //assign Log_IN =(LF_Data[30])?13'd0:((LF_Data[28:13] > 18'd8091)?13'd8191:LF_Data[25:13]);
   wire [7:0] Log_OUT;
  LOG_Table	LOG_Table_inst (
@@ -543,16 +541,17 @@ module ArrayUltrasound(
 	
 	reg [7:0] Interlace;
 	
+
 	always @(*) begin
 		case(Zoom)
-		2'b00:     //90mm
-			Interlace <= 8'd10;
-		2'b01:     //130mm
-		    Interlace <= 8'd15;
-		2'b10:     //160mm
-			Interlace <= 8'd19;
-		2'b11:     //200mm
-			Interlace <= 8'd24;
+		2'b00:     //40mm
+			Interlace <= 8'd4;
+		2'b01:     //63mm
+		    Interlace <= 8'd7;
+		2'b10:     //78mm
+			Interlace <= 8'd9;
+		2'b11:     //102mm
+			Interlace <= 8'd12;
 		endcase
 	end
 	
@@ -596,7 +595,7 @@ module ArrayUltrasound(
 				Sample_Counter <= Sample_Counter + 1'b1;
 			end
 			
-			if(Sample_Counter <=16'd2000) begin  //<30mm
+			if(Sample_Counter <=16'd900) begin  //<15mm
 				if(Focus_Num[1:0] == 2'b00) begin
 					Seg_Enable <= 1'b1;
 				end
@@ -606,8 +605,8 @@ module ArrayUltrasound(
 				
 				LF_Reg <= (Sum_Log[11:4]>Base_Noise1)? (Sum_Log[11:4]-Base_Noise1): 8'd0 ;				
 			end
-			/*
-			else if(Sample_Counter <=16'd3200) begin  //<50mm
+			
+			else if(Sample_Counter <=16'd1599) begin  //<25mm
 				if(Focus_Num[1:0] == 2'b01) begin
 					Seg_Enable <= 1'b1;
 				end
@@ -617,7 +616,7 @@ module ArrayUltrasound(
 				LF_Reg <= Sum_Log[11:4];
 				
 			end
-			*/
+			
 			else begin
 				if(Focus_Num[1:0] == 2'b11) begin
 					Seg_Enable <= 1'b1;
@@ -685,7 +684,7 @@ IMG_TRI_BUFFER	IMG_TRI_BUFFER_inst (
 	.qb ( Trans_Data2 )
 	);
 
-assign Trans_Data =Trans_Data1;//{1'b0,Trans_Data1} + {1'b0,Trans_Data2};
+assign Trans_Data ={1'b0,Trans_Data1} + {1'b0,Trans_Data2};
 	
 
 
